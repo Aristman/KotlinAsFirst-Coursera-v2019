@@ -3,6 +3,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -63,7 +64,17 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String {
+    val shortAge = age % 100
+    if (shortAge in 10..20) return "$age лет"
+    val shortSAge = shortAge % 10
+    return when {
+        shortSAge == 0 || shortSAge in 5..9 -> "$age лет"
+        shortSAge == 1 -> "$age год"
+        shortSAge in 2..4 -> "$age года"
+        else -> "Нет ответа"
+    }
+}
 
 /**
  * Простая
@@ -76,7 +87,18 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    val path1 = t1 * v1
+    val path2 = t2 * v2
+    val halfPath = (t1 * v1 + t2 * v2 + t3 * v3) / 2.0
+    if (halfPath <= path1) {
+        return halfPath / v1
+    } else if (halfPath <= (path1 + path2)) {
+        return t1 + (halfPath - path1) / v2
+    } else {
+        return t1 + t2 + (halfPath - path1 - path2) / v3
+    }
+}
 
 /**
  * Простая
@@ -91,7 +113,17 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = TODO()
+): Int {
+    var rook1 = 0
+    var rook2 = 0
+    if (kingX == rookX1 || kingY == rookY1) {
+        rook1 = 1
+    }
+    if (kingX == rookX2 || kingY == rookY2) {
+        rook2 = 2
+    }
+    return rook1 + rook2
+}
 
 /**
  * Простая
@@ -107,7 +139,17 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    var fig1 = 0
+    var fig2 = 0
+    if (kingX == rookX || kingY == rookY) {
+        fig1 = 1
+    }
+    if (abs(kingX - bishopX) == abs(kingY - bishopY)) {
+        fig2 = 2
+    }
+    return fig1 + fig2
+}
 
 /**
  * Простая
@@ -118,6 +160,7 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+
 
 /**
  * Средняя
