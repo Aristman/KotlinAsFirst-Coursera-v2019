@@ -162,17 +162,21 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val gip = maxOf(a, b, c)
-    var kat1 = 0.0
-    var kat2 = 0.0
-    if (gip == a) {
-        kat1 = b
-        kat2 = c
-    } else if (gip == b) {
-        kat1 = a
-        kat2 = c
-    } else {
-        kat1 = a
-        kat2 = b
+    val kat1: Double
+    val kat2: Double
+    when (gip) {
+        a -> {
+            kat1 = b
+            kat2 = c
+        }
+        b -> {
+            kat1 = a
+            kat2 = c
+        }
+        else -> {
+            kat1 = a
+            kat2 = b
+        }
     }
     return if (kat1 <= 0 || kat2 <= 0 || kat1 + kat2 <= gip) {
         -1
