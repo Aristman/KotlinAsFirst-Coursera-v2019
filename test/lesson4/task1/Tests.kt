@@ -65,8 +65,8 @@ class Tests {
     @Test
     @Tag("Example")
     fun squaresVararg() {
-        assertArrayEquals(arrayOf(0), squares(0))
-        assertArrayEquals(arrayOf(1, 4, 9), squares(1, 2, -3))
+        assertArrayEquals(arrayOf(0), squaresVararg(0))
+        assertArrayEquals(arrayOf(1, 4, 9), squaresVararg(1, 2, -3))
     }
 
     @Test
